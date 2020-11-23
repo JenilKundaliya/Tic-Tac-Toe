@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Castoro&family=Playfair+Display&display=swap" rel="stylesheet">
+    <title>Tic-Tac-Toe</title>
+    <style>
+        header {
+            margin: 5px 5px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 80vh;
+            align-items: center;
+            /* border: 2px solid blue; */
+        }
+
+        .game {
+            width: 60%;
+            height: 60%;
+            /* border: 2px solid red; */
+            display: grid;
+            grid-template-columns: 33% 33% 33%;
+            display: none;
+
+        }
+
+        .box {
+            width: 100%;
+            height: 150px;
+            border-right: 2px solid blue;
+            border-bottom: 2px solid blue;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            transition: all 2s ease;
+
+            /* overflow: hidden; */
+        }
+
+
+        #box-3,
+        #box-6,
+        #box-9 {
+            border-right: none;
+        }
+
+        #box-7,
+        #box-8,
+        #box-9 {
+            border-bottom: none;
+        }
+
+        .start {
+            font-family: 'Castoro', serif;
+            font-size: 28px;
+            /* display: none; */
+        }
+
+        #user-1 {
+            font-family: 'Castoro', serif;
+            display: none;
+            font-size: 28px;
+        }
+
+        #user-2 {
+            font-family: 'Castoro', serif;
+            display: none;
+            font-size: 28px;
+        }
+
+        .timer h1 {
+            font-size: 55px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        span::before {
+            content: '';
+        }
+
+        span::after {
+            content: '5';
+            animation-name: timer;
+            animation-duration: 5s;
+            animation-delay: 2s;
+            animation-timing-function: ease;
+            animation-iteration-count: 1;
+        }
+
+        @keyframes timer {
+            25% {
+                content: '4';
+            }
+
+            50% {
+                content: '3';
+            }
+
+            75% {
+                content: '2';
+            }
+
+
+            100% {
+                content: '1';
+            }
+        }
+        #winner1,#winner2{
+            display: none;
+font-size: 40px;
+color: blue;
+animation-name: winner;
+animation-duration: 2s;
+animation-timing-function:ease;
+animation-iteration-count: 2;
+animation-delay: 1s;
+font-family: 'Playfair Display', serif;
+
+
+        }
+        @keyframes winner {
+            0%{
+                font-size: 40px;
+            }
+          
+            100%{
+                font-size: 80px;
+            }
+        }
+        #tie{
+            display: none;
+font-size: 40px;
+color: red;
+animation-name: tie;
+animation-duration: 2s;
+animation-timing-function:ease;
+animation-iteration-count: 2;
+animation-delay: 1s;
+font-family: 'Castoro', serif;  
+        }
+        @keyframes tie {
+            0%{
+                font-size: 40px;
+            }
+          
+            100%{
+                font-size: 80px;
+            }
+        }
+        #play-again{
+            font-size: 40px;
+color: red;
+font-family: 'Castoro', serif;
+display: none;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="start" id="start">
+        <div class="alert alert-primary" role="alert">
+            Welcome To The Tic-Tac-Toe Game :)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+        </div>
+    </div>
+    <div class="user-1" id="user-1">
+
+        <div class="alert alert-success" role="alert">
+            User-1's Turn :)&nbsp;&nbsp;Your Icon is 'X'
+        </div>
+    </div>
+    <div class="user-2" id="user-2">
+
+        <div class="alert alert-success" role="alert">
+            User-2's Turn :)&nbsp;&nbsp;Your Icon is 'O'
+        </div>
+    </div>
+    <header id="header">
+        <div class="timer" id="timer">
+            <h1>Your Game will Start in <span></span> Secs</h1>
+        </div>
+        <div class="game" id="game">
+            <div class="box" id="box-1"></div>
+            <div class="box" id="box-2"></div>
+            <div class="box" id="box-3"></div>
+            <div class="box" id="box-4"></div>
+            <div class="box" id="box-5"></div>
+            <div class="box" id="box-6"></div>
+            <div class="box" id="box-7"></div>
+            <div class="box" id="box-8"></div>
+            <div class="box" id="box-9"></div>
+        </div>
+        <div id="winner1">YooHoo!!!&nbsp;&nbsp;
+            
+            User-1 is the Winner
+        </div>
+        <div id="winner2">
+            YooHoo!!!&nbsp;&nbsp;
+            
+            User-2 is the Winner
+        </div>
+        <div id="tie">
+            OOPS!!&nbsp;&nbsp; :(
+            
+            There's No Winner....Reload the page to play Again
+        </div>
+        <div id="play-again">
+To Play Again.....Plz Reload the Page:)
+        </div>
+    </header>
+    <script src="./JS/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- <script src="./JS/temp.js"></script> -->
+</body>
+
+</html>
